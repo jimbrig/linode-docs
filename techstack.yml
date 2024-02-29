@@ -2,7 +2,7 @@ repo_name: jimbrig/linode-docs
 report_id: 75e10f8471a3769d1c88eed1b04ea4f6
 version: 0.1
 repo_type: Public
-timestamp: '2024-01-05T08:28:24+00:00'
+timestamp: '2024-02-29T18:59:13+00:00'
 requested_by: Rajakavitha1
 provider: github
 branch: develop
@@ -266,7 +266,7 @@ tools:
   last_updated_by: Nathan
   last_updated_on: 2018-08-21 19:38:10.000000000 Z
 - name: Prettier
-  description: 'Prettier is an opinionated code formatter. '
+  description: Prettier is an opinionated code formatter.
   website_url: https://prettier.io/
   version: 2.6.2
   license: MIT
