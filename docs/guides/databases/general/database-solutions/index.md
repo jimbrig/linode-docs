@@ -2,12 +2,12 @@
 slug: database-solutions
 title: "Determine the Best Database and Cloud Hosting Solution for Your Next Application"
 description: "Learn about the most popular database management systems and how to host them on the Akamai cloud computing platform."
+authors: ["Linode"]
+contributors: ["Linode"]
+published: 2023-07-11
+modified: 2024-11-14
 keywords: ['DBMS', 'managed database']
 license: '[CC BY-ND 4.0](https://creativecommons.org/licenses/by-nd/4.0)'
-published: 2023-07-11
-modified_by:
-  name: Linode
-authors: ["Linode"]
 ---
 
 Most applications use databases to store and organize the information they handle. When building a custom application or deploying an existing application, deciding what database software to use is often one of the most important decisions. This guide outlines some of the most popular database software and includes advice on both selecting the database and hosting it on Akamai.
@@ -66,6 +66,9 @@ Non-relational databases (also referred to as [NoSQL Databases](/docs/guides/wha
 After determining which database management system to use for your application, you need to decide how to deploy, configure, and manage that system in the cloud. The Akamai cloud computing platform offers the following solutions:
 
 - [Managed Databases](#managed-databases)
+
+    {{% content "dbass-eos" %}}
+
 - [Marketplace Apps (and Clusters)](#marketplace-apps-and-clusters)
 - [Self or custom deployment on Compute Instances](#custom-deployment)
 
@@ -77,14 +80,14 @@ Many users employ provisioning tools like Terraform and configuration management
 
 *Use Managed Databases when you want to offload database software and infrastructure management and do not require full root control or setting customization.*
 
-The [Managed Database](/docs/products/databases/managed-databases/) service is an easy-to-use and fully-managed database solution. When a database is deployed through Managed Databases, the infrastructure, software, firewall, and high availability systems are configured automatically. This saves you time and resources. Once provisioned, you can add your application's IP addresses to allow traffic and then connect to the database directly from your application.
+The [Managed Database](https://techdocs.akamai.com/cloud-computing/docs/managed-databases) service is an easy-to-use and fully-managed database solution. When a database is deployed through Managed Databases, the infrastructure, software, firewall, and high availability systems are configured automatically. This saves you time and resources. Once provisioned, you can add your application's IP addresses to allow traffic and then connect to the database directly from your application.
 
 Managed Databases can be deployed with a single node (1 underlying machine) or a cluster of 3 nodes. Using 3 nodes provides you with a highly available database cluster, complete with data redundancy and automatic failover. Further, you can customize the size of the nodes and select from [Dedicated CPU](/docs/products/compute/compute-instances/plans/dedicated-cpu/) or [Shared CPU](/docs/products/compute/compute-instances/plans/shared-cpu/) Compute Instance plans. Since the underlying machines are fully-managed, direct root or console access is not provided and there is limited customization options for the database software.
 
 Currently, the following databases are supported. Click on each database below to learn more and to view the available software versions.
 
-- [MySQL](/docs/products/databases/managed-databases/guides/database-engines/#mysql)
-- [PostgreSQL](/docs/products/databases/managed-databases/guides/database-engines/#postgresql)
+- [MySQL](https://techdocs.akamai.com/cloud-computing/docs/mysql-managed-database)
+- [PostgreSQL](https://techdocs.akamai.com/cloud-computing/docs/postgresql-managed-databases)
 
 {{< note >}}
 Updates and security patches are automatically applied to the underlying operating system but *not* to the database software. For more details, review the [Automatic Updates and Maintenance Windows](/docs/products/databases/managed-databases/guides/updates-and-maintenance/) guide.

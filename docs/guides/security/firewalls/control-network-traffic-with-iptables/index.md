@@ -1,23 +1,22 @@
 ---
 slug: control-network-traffic-with-iptables
+title: A Tutorial for Controlling Network Traffic with iptables
+title_meta: Controlling Network Traffic with iptables - A Tutorial
 description: "iptables is an application that allows users to configure specific rules that will be enforced by the kernel's netfilter framework. This guide will focus on the configuration and application of iptables rulesets."
+authors: ["Linode"]
+contributors: ["Linode"]
+published: 2010-07-30
+modified: 2024-11-07
 keywords: ["iptables", "networking", "firewalls", "filtering"]
 license: '[CC BY-ND 4.0](https://creativecommons.org/licenses/by-nd/4.0)'
 aliases: ['/networking/firewalls/control-network-traffic-with-iptables/','/security/firewalls/iptables/','/security/firewalls/control-network-traffic-with-iptables/']
 bundles: ['debian-security', 'centos-security', 'network-security']
-modified: 2017-02-28
-modified_by:
-  name: Linode
-published: 2010-07-30
-title: A Tutorial for Controlling Network Traffic with iptables
-title_meta: Controlling Network Traffic with iptables - A Tutorial
 external_resources:
  - '[Security Basics](/docs/products/compute/compute-instances/guides/set-up-and-secure/)'
  - '[Using the Linode Shell (Lish)](/docs/networking/using-the-linode-shell-lish)'
  - '[iptables: Linux firewall rules for a basic Web Server](http://bencane.com/2012/09/17/iptables-linux-firewall-rules-for-a-basic-web-server/)'
  - '[Linux Firewalls with iptables](http://www.linuxhomenetworking.com/wiki/index.php/Quick_HOWTO_:_Ch14_:_Linux_Firewalls_Using_iptables)'
 tags: ["networking","security"]
-authors: ["Linode"]
 ---
 
 **iptables** is an application that allows users to configure specific rules that will be enforced by the kernel's `netfilter` framework. It acts as a packet filter and firewall that examines and directs traffic based on port, protocol and other criteria. This guide will focus on the configuration and application of iptables rulesets and will provide examples of ways they are commonly used.
@@ -133,8 +132,7 @@ Replacing a rule is similar to inserting, but instead uses `iptables -R`. For ex
 Deleting a rule is also done using the rule number. For example, to delete the rule we just inserted for port 8080:
 
     sudo iptables -D INPUT 7
-
-{{< note type="alert" respectIndent=false >}}
+{{< note type="alert" >}}
 Editing rules does not automatically save them. See our section on [deploying rulesets](/docs/guides/control-network-traffic-with-iptables/#deploy-your-iptables-rulesets) for the specific instructions for your distribution.
 {{< /note >}}
 
@@ -210,7 +208,7 @@ One way to create a firewall is to block all traffic to the system and then allo
     iptables -P INPUT DROP
     iptables -P FORWARD DROP
 
-Let's break down the example above. The first two commands add or append rules to the `INPUT` chain in order to allow access on specific ports. The `-p tcp` and `-p udp` options specify either UDP or TCP packet types. The `-m multiport` function matches packets on the basis of their source or destination ports, and can accept the specification of up to 15 ports. Multiport also accepts ranges such as `8999:9003` which counts as 2 of the 15 possible ports, but matches ports `8999`, `9000`, `9001`, `9002`, and `9003`. The next command allows all incoming and outgoing packets that are associated with existing connections so that they will not be inadvertently blocked by the firewall. The final two commands use the `-P` option to describe the *default policy* for these chains. As a result, all packets processed by `INPUT` and `FORWARD` will be dropped by default.
+In the example above, the third command allows all incoming and outgoing packets that are associated with existing connections so that they will not be inadvertently blocked by the firewall. The fourth and fifth commands add or append rules to the `INPUT` chain in order to allow access on specific ports. The `-p tcp` and `-p udp` options specify either UDP or TCP packet types. The `-m multiport` function matches packets on the basis of their source or destination ports, and can accept the specification of up to 15 ports. Multiport also accepts ranges such as `8999:9003` which counts as 2 of the 15 possible ports, but matches ports `8999`, `9000`, `9001`, `9002`, and `9003`. The final two commands use the `-P` option to describe the *default policy* for these chains. As a result, all packets processed by `INPUT` and `FORWARD` will be dropped by default.
 
 Note that the rules described above only control incoming packets, and do not limit outgoing connections.
 
@@ -226,7 +224,7 @@ You can use iptables to block all traffic and then only allow traffic from certa
     iptables -P INPUT DROP
     iptables -P FORWARD DROP
 
-In the first command, the `-s 192.168.1.0/24` statement specifies that all source IPs (`-s`) in the address space of `192.168.1` are allowed. You may specify an IP address range using CIDR (Classless Inter-Domain Routing) notation, or individual IP addresses, as in the second command. The third command allows all incoming and outgoing packets that are associated with existing connections. The final two commands set the default policy for all `INPUT` and `FORWARD` chains to drop all packets.
+ The third command allows all incoming and outgoing packets that are associated with existing connections. In the fourth command, the `-s 192.168.1.0/24` statement specifies that all source IPs (`-s`) in the address space of `192.168.1` are allowed. You may specify an IP address range using CIDR (Classless Inter-Domain Routing) notation, or individual IP addresses, as in the fifth command. The final two commands set the default policy for all `INPUT` and `FORWARD` chains to drop all packets.
 
 ## Use ip6tables to Manage IPv6 Traffic
 
@@ -289,8 +287,7 @@ This rule breaks down as follows:
 ## Basic iptables Rulesets for IPv4 and IPv6
 
 Appropriate firewall rules depend on the services being run. Below are iptables rulesets to secure your Linode if you're running a web server.
-
-{{< note type="alert" respectIndent=false >}}
+{{< note type="alert" >}}
 **These rules are given only as an example.** A real production web server may require more or less configuration, and these rules would not be appropriate for a database, Minecraft or VPN server. Iptables rules can always be modified or reset later, but these basic rulesets serve as a demonstration.
 {{< /note >}}
 
@@ -337,7 +334,7 @@ COMMIT
 {{< /file >}}
 
 
-**Optional:** If you plan to use [Linode Longview](/docs/guides/what-is-longview/) or [Linode's NodeBalancers](/docs/products/networking/nodebalancers/get-started/), add the respective rule after the section for allowing HTTP and HTTPS connections:
+**Optional:** If you plan to use [Linode Longview](/docs/products/tools/longview/get-started/) or [Linode's NodeBalancers](/docs/products/networking/nodebalancers/get-started/), add the respective rule after the section for allowing HTTP and HTTPS connections:
 
     # Allow incoming Longview connections from longview.linode.com
     -A INPUT -s 96.126.119.66 -m state --state NEW -j ACCEPT
@@ -385,8 +382,7 @@ COMMIT
 
 {{< /file >}}
 
-
-{{< note respectIndent=false >}}
+{{< note >}}
 [APT](http://linux.die.net/man/8/apt) attempts to resolve mirror domains to IPv6 as a result of `apt-get update`. If you choose to entirely disable and deny IPv6, this will slow down the update process for Debian and Ubuntu because APT waits for each resolution to time out before moving on.
 
 To remedy this, uncomment the line `precedence ::ffff:0:0/96  100` in `/etc/gai.conf`.
