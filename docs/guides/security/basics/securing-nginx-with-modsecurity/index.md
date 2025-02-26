@@ -1,15 +1,14 @@
 ---
 slug: securing-nginx-with-modsecurity
+title: Securing Nginx With ModSecurity
+title_meta: How to Secure Nginx With ModSecurity
 description: 'ModSecurity is a free web application firewall that can prevent attacks like XSS and SQL Injection. This guide shows how to install ModSecurity with NGINX.'
+authors: ["Hackersploit"]
+contributors: ["Hackersploit"]
+published: 2021-03-26
 keywords: ["nginx security", "nginx best practices security", "secure nginx config"]
 tags: ["security","web server","nginx"]
 license: '[CC BY-ND 4.0](https://creativecommons.org/licenses/by-nd/4.0)'
-modified: 2021-03-26
-modified_by:
-  name: Linode
-published: 2021-03-26
-title: Securing Nginx With ModSecurity
-title_meta: How to Secure Nginx With ModSecurity
 aliases: ['security/basics/securing-nginx-with-modsecurity/']
 image: SecureNginx_ModSecurity.png
 relations:
@@ -17,7 +16,6 @@ relations:
         key: securing-web-servers-with-modsecurity
         keywords:
             - web server: NGINX
-authors: ["Hackersploit"]
 ---
 
 ## What is ModSecurity?
@@ -34,7 +32,7 @@ In order to install and configure ModSecurity, you need to have a Linux server w
 
 For instructions, see our guide on [How to Install NGINX on Ubuntu 18.04 LTS](/docs/guides/how-to-install-nginx-ubuntu-18-04/). Installation instructions for several other Linux distributions are also accessible from this guide.
 
-{{< note respectIndent=false >}}
+{{< note >}}
 This demonstration has been performed on Ubuntu 18.04. However, all techniques demonstrated are distribution agnostic with the exception of package names and package managers.
 {{< /note >}}
 
@@ -200,15 +198,15 @@ ModSecurity is a firewall and therefore requires rules to function. This section
 1.  Copy over the unicode mapping file and the ModSecurity configuration file from your cloned ModSecurity GitHub repository:
 
         sudo cp /opt/ModSecurity/unicode.mapping /etc/nginx/modsec
-        sudo cp /opt/ModSecurity/modsecurity.conf-recommended /etc/nginx/modsec/modsecurity.conf
+        sudo cp /opt/ModSecurity/modsecurity.conf-recommended /etc/nginx/modsec
 
-1. Remove the `.recommended` extension from the ModSecurity configuration filename with the following command:
+1. Remove the `-recommended` extension from the ModSecurity configuration filename with the following command:
 
-        sudo cp /etc/modsecurity/modsecurity.conf-recommended /etc/modsecurity/modsecurity.conf
+        sudo cp /etc/nginx/modsec/modsecurity.conf-recommended /etc/nginx/modsec/modsecurity.conf
 
-1.  With a text editor such as vim, open `/etc/modsecurity/modsecurity.conf` and change the value for `SecRuleEngine` to `On`:
+1.  With a text editor such as vim, open `/etc/nginx/modsec/modsecurity.conf` and change the value for `SecRuleEngine` to `On`:
 
-    {{< file "/etc/modsecurity/modsecurity.conf" aconf >}}
+    {{< file "/etc/nginx/modsec/modsecurity.conf" aconf >}}
 # -- Rule engine initialization ----------------------------------------------
 
 # Enable ModSecurity, attaching it to every transaction. Use detection
